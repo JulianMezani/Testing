@@ -28,7 +28,7 @@ jobs:
         working-directory: ./dvapi  # Navigate to DVAPI directory
         run: |
           docker-compose up -d --build  # Build and run DVAPI
-          sleep 50  # Wait for DVAPI to initialize
+          sleep 30  # Wait for DVAPI to initialize
 
       # Step 3: Run ZAP Scan against DVAPI (using host network)
       - name: Run ZAP Full Scan
@@ -38,10 +38,11 @@ jobs:
             -t zaproxy/zap-stable zap-baseline.py \
             -t http://127.0.0.1:3000 \  # DVAPI runs on port 3000
             -a \                        # Attack mode
+            -I
 
       # Step 4: Upload ZAP Report as Artifact
-     # - name: Upload Report
-       # uses: actions/upload-artifact@v3
-      #  with:
-        #  name: zap-dvapi-report
-         # path: zap-report.html
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-dvapi-report
+          path: zap-report.html
