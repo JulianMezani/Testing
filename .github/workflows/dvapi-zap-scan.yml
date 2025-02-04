@@ -8,6 +8,8 @@ on:
 jobs:
   dvapi-zap-scan:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       # Step 1: Install Docker Compose
       - name: Install Docker Compose
