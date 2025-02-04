@@ -35,8 +35,9 @@ jobs:
         run: |
           docker run --network host \
             -v $(pwd):/zap/wrk/:rw \
-            -t zaproxy/zap-stable zap-full-scan.py \
+            -t owasp/zap2docker-stable zap-full-scan.py \
             -t http://127.0.0.1:3000 \  # DVAPI runs on port 3000
+            -r zap-report.html    \      # Generate HTML report
             -I
 
       # Step 4: Upload ZAP Report as Artifact
