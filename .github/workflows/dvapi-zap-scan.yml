@@ -37,7 +37,6 @@ jobs:
             -v $(pwd):/zap/wrk/:rw \
             -t zaproxy/zap-stable zap-full-scan.py \
             -t http://127.0.0.1:3000 \  # DVAPI runs on port 3000
-            -a \                        # Attack mode
             -I
 
       # Step 4: Upload ZAP Report as Artifact
