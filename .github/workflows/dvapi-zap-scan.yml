@@ -28,14 +28,14 @@ jobs:
         working-directory: ./dvapi  # Navigate to DVAPI directory
         run: |
           docker-compose up -d --build  # Build and run DVAPI
-          sleep 30  # Wait for DVAPI to initialize
+          sleep 60  # Wait for DVAPI to initialize
 
       # Step 3: Run ZAP Scan against DVAPI (using host network)
       - name: Run ZAP Full Scan
         run: |
           docker run --network host \
             -v $(pwd):/zap/wrk/:rw \
-            -t owasp/zap2docker-stable zap-full-scan.py \
+            -t zaproxy/zap-stable zap-full-scan.py \
             -t http://127.0.0.1:3000 \  # DVAPI runs on port 3000
             -r zap-report.html    \      # Generate HTML report
             -I
