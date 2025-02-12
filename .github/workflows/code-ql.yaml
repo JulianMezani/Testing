@@ -15,7 +15,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: java  # Change this if dvapi uses another language
+          languages: Java/Kotlin  # Change this if dvapi uses another language
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
