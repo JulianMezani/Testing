@@ -1,0 +1,34 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.cert.Certificate;
+import java.io.*;
+ 
+import javax.net.ssl.*;
+import javax.net.ssl.HttpsURLConnection;
+ 
+public class Fetcher {
+ 
+  public static void fetch(String url){
+    if (url.startsWith("https://pentesterlab.com")){
+      URL https_url;
+      try {
+        https_url = new URL(url);
+        HttpsURLConnection con = (HttpsURLConnection)https_url.openConnection();
+            
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String input;
+        
+        while ((input = br.readLine()) != null){
+          System.out.println(input);
+        } 
+        br.close();
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+      } 
+    } else {
+      System.out.println("ACCESS DENIED");
+    } 
+  } 
+} 
+ 
